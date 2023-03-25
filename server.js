@@ -46,6 +46,38 @@ app.post("/update", async (req, res, next) => {
     const status = req.body.e_status;
     try {
         //update code
+        const employee = await Employee.findById(id);
+        if (!employee) {
+            throw new Error("Employee with id " + id + " not found");
+        }
+        employee.name = name;
+        employee.address = address;
+        employee.age = age;
+        employee.department = department;
+        employee.status = status;
+        employee.save();
+        res.send({ message: "Updated Successfully" });
+    } catch (err) {
+        res.status(404).send({ message: err.message });
+    }
+});
+
+app.get("/employees", async (req, res) => {
+    try {
+        const employees = await Employee.find({});
+        console.log(employees);
+        res.send(employees);
+    } catch (err) {
+        res.status(404).send({ message: err.message });
+    }
+});
+
+app.get("/employees/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        const employees = await Employee.findById(id);
+        console.log(employees);
+        res.send(employees);
     } catch (err) {
         res.status(404).send({ message: err.message });
     }
