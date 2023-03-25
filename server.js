@@ -65,7 +65,7 @@ app.post("/update", async (req, res, next) => {
 app.get("/employees", async (req, res) => {
     try {
         const employees = await Employee.find({});
-        console.log(employees);
+        //console.log(employees);
         res.send(employees);
     } catch (err) {
         res.status(404).send({ message: err.message });
@@ -76,7 +76,7 @@ app.get("/employees/:id", async (req, res) => {
     const id = req.params.id;
     try {
         const employees = await Employee.findById(id);
-        console.log(employees);
+        //console.log(employees);
         res.send(employees);
     } catch (err) {
         res.status(404).send({ message: err.message });
