@@ -85,7 +85,7 @@ app.get("/employees/:id", async (req, res) => {
 
 mongoose.connect(process.env.mongodb_uri).then((result) => {
     //console.log(result);
-    const port = 8000;
+    const port = process.env.PORT || 3000;
     app.listen(port, () => {
         console.log("Server started at port " + port);
     });
