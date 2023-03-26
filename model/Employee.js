@@ -9,6 +9,8 @@ const EmployeeSchema = new mongoose.Schema(
             type: String,
             enum: ["Remote Location", "Contract Employee", "Full-Time"],
         },
+        lat: { type: String, required: true },
+        long: { type: String, required: true },
     },
     { timestamps: true }
 );

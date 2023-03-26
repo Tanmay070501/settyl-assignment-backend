@@ -21,6 +21,8 @@ app.post("/create", async (req, res, next) => {
     const age = req.body.e_age;
     const department = req.body.e_department;
     const status = req.body.e_status;
+    const lat = req.body.lat;
+    const long = req.body.long;
     try {
         const employee = new Employee({
             name,
@@ -28,6 +30,8 @@ app.post("/create", async (req, res, next) => {
             age,
             department,
             status,
+            lat,
+            long
         });
         let res_emp = await employee.save();
         //console.log(res_emp);
@@ -44,6 +48,8 @@ app.post("/update", async (req, res, next) => {
     const age = req.body.e_age;
     const department = req.body.e_department;
     const status = req.body.e_status;
+    const lat = req.body.lat;
+    const long = req.body.long;
     try {
         //update code
         const employee = await Employee.findById(id);
@@ -55,12 +61,15 @@ app.post("/update", async (req, res, next) => {
         employee.age = age;
         employee.department = department;
         employee.status = status;
+        employee.lat = lat;
+        employee.long = long;
         employee.save();
         res.send({ message: "Updated Successfully" });
     } catch (err) {
         res.status(404).send({ message: err.message });
     }
 });
+
 
 app.get("/employees", async (req, res) => {
     try {
